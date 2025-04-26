@@ -35,12 +35,12 @@ void posicionarBarco( int tamanhoDoBarco, char posicao, int tabuleiro[10][10], i
 
     //Testa se a posicao esta em um numero marior q zero
     if(posicaoInicialX >= 0 && posicaoInicialY >= 0){
-        printf("[DEBUG] - Posicao inicial maior que 0\n");
+        //printf("[DEBUG] - Posicao inicial maior que 0\n");
 
         //testa se a posicao e vertical e se a posicao inicial esta dentro do mapa e se a borda do barco esta dentro do mapa
         if(posicao == 'v' && posicaoInicialY < 10 && bordaX <= 10){
 
-            printf("[DEBUG] - Posicao inicial menor que 10 e borda menor q 10\n");
+            //printf("[DEBUG] - Posicao inicial menor que 10 e borda menor q 10\n");
                 int sobreposicao = 0;
                 //percorre o mapa para ver se a posicao ja esta preenchida
                 for (int i = 0; i < tamanhoDoBarco; i++)
@@ -54,9 +54,12 @@ void posicionarBarco( int tamanhoDoBarco, char posicao, int tabuleiro[10][10], i
                     {
                     tabuleiro[posicaoInicialX + i][posicaoInicialY] = tamanhoDoBarco;
                     }
+                    else 
+                    {
+                        printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
+                    }
                     
                 }
-                printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
         }
     }
 
@@ -76,14 +79,72 @@ void posicionarBarco( int tamanhoDoBarco, char posicao, int tabuleiro[10][10], i
                     {
                     tabuleiro[posicaoInicialX][posicaoInicialY + i] = tamanhoDoBarco;
                     }
-                    
+                    else 
+                    {
+                        printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
+                    }
                 }
-                printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
         }
     
     else
     {
-        printf("[DEBUG] - Condicao falsa\n");
+        //printf("[DEBUG] - Condicao falsa\n");
+    }
+
+    //testa se a posicao e diagonal \ descendo e se a posicao inicial esta dentro do mapa e se a borda do barco esta dentro do mapa
+    if(posicao == 'd' && posicaoInicialX < 10 && posicaoInicialY < 10 && bordaY <= 10 && bordaX  <=10){
+
+        int sobreposicao = 0;
+        //percorre o mapa para ver se a posicao ja esta preenchida
+        for (int i = 0; i < tamanhoDoBarco; i++)
+        {
+            (tabuleiro[posicaoInicialX + i][posicaoInicialY + i] != 0) ? sobreposicao = sobreposicao + 1 : sobreposicao;
+        }
+        //insere o barco no mapa
+        for (int i = 0; i < tamanhoDoBarco; i++)
+        {
+            if(sobreposicao == 0)
+            {
+            tabuleiro[posicaoInicialX + i][posicaoInicialY + i] = tamanhoDoBarco;
+            }
+            else 
+            {
+                printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
+            }
+        }
+        
+    }
+    else
+    {
+    //printf("[DEBUG] - Condicao falsa\n");
+    }
+
+    //testa se a posicao e diagonal / subindo e se a posicao inicial esta dentro do mapa e se a borda do barco esta dentro do mapa
+    if(posicao == 's' && posicaoInicialX < 10 && posicaoInicialY < 10 && bordaY <= 10 && bordaX  <=10){
+
+        int sobreposicao = 0;
+        //percorre o mapa para ver se a posicao ja esta preenchida
+        for (int i = 0; i < tamanhoDoBarco; i++)
+        {
+            (tabuleiro[posicaoInicialX - i][posicaoInicialY + i] != 0) ? sobreposicao = sobreposicao + 1 : sobreposicao;
+        }
+        //insere o barco no mapa
+        for (int i = 0; i < tamanhoDoBarco; i++)
+        {
+            if(sobreposicao == 0)
+            {
+            tabuleiro[posicaoInicialX - i][posicaoInicialY + i] = tamanhoDoBarco;
+            }
+            else 
+            {
+                printf("sobeposicao barco: %c - tamanho: %d - JA OCUPADA\n", posicao, tamanhoDoBarco);
+            }
+        }
+        
+    }
+    else
+    {
+    //printf("[DEBUG] - Condicao falsa\n");
     }
         
         
@@ -96,12 +157,21 @@ int main(){
     criarTabuleiro(tabuleiro);
     mostrarTabuleiro(tabuleiro);
 
+    
     printf("\nBarco posicionado na vertical:\n");
     posicionarBarco(3,'v',tabuleiro,5,9);
     mostrarTabuleiro(tabuleiro);
 
     printf("\nBarco posicionado na horizontal:\n");
-    posicionarBarco(3,'h',tabuleiro,5,7);
+    posicionarBarco(3,'h',tabuleiro,4,7);
+    mostrarTabuleiro(tabuleiro);
+
+    printf("\nBarco posicionado na diagonal descendo:\n");
+    posicionarBarco(3,'d',tabuleiro,3,3);
+    mostrarTabuleiro(tabuleiro);
+
+    printf("\nBarco posicionado na diagonal descendo:\n");
+    posicionarBarco(3,'s',tabuleiro,2,5);
     mostrarTabuleiro(tabuleiro);
     return 0;
 }
