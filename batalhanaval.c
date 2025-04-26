@@ -159,7 +159,6 @@ void habilidadeCone(int posicaoX, int posicaoY, int tabuleiro[10][10]){
     if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 2 && posicaoY < 8)
     {
         //topo
-        //tabuleiro[posicaoX - 1][posicaoY] = 5;
         tabuleiro[posicaoX - 1][posicaoY] = (tabuleiro[posicaoX - 1][posicaoY] == 3) ? 1 : 5;
         
 
@@ -177,17 +176,16 @@ void habilidadeCone(int posicaoX, int posicaoY, int tabuleiro[10][10]){
     }
     else 
     {
-        printf("Posicao invvalida\n");
+        printf("Posicao invalida\n");
     }
 
 }
 void habilidadeCruz(int posicaoX, int posicaoY, int tabuleiro[10][10]){
 
     //testa se esta dentro do mapa
-    if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 2 && posicaoY < 8)
+    if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 1 && posicaoY < 9)
     {
         //topo
-        //tabuleiro[posicaoX - 1][posicaoY] = 5;
         tabuleiro[posicaoX - 1][posicaoY] = (tabuleiro[posicaoX - 1][posicaoY] == 3) ? 1 : 5;
         
 
@@ -209,6 +207,30 @@ void habilidadeCruz(int posicaoX, int posicaoY, int tabuleiro[10][10]){
 
 }
 
+void habilidadeOctaedro(int posicaoX, int posicaoY, int tabuleiro[10][10]){
+
+    //testa se esta dentro do mapa
+    if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 2 && posicaoY < 10)
+    {
+        //topo
+        tabuleiro[posicaoX - 1][posicaoY] = (tabuleiro[posicaoX - 1][posicaoY] == 3) ? 1 : 5;
+        
+
+        //meio
+        tabuleiro[posicaoX][posicaoY - 1] = ( tabuleiro[posicaoX][posicaoY - 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY ] = ( tabuleiro[posicaoX][posicaoY] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY + 1] = ( tabuleiro[posicaoX][posicaoY + 1] == 3) ? 1 : 5;
+
+        //base
+        tabuleiro[posicaoX + 1][posicaoY] = ( tabuleiro[posicaoX + 1][posicaoY] == 3) ? 1 : 5;     
+    }
+    else 
+    {
+        printf("Posicao invalida\n");
+    }
+
+}
+
 int main(){
 
     int tabuleiro[10][10];
@@ -216,7 +238,6 @@ int main(){
     criarTabuleiro(tabuleiro);
     mostrarTabuleiro(tabuleiro);
 
-    
     printf("\nBarco posicionado na vertical:\n");
     posicionarBarco(3,'v',tabuleiro,5,9);
     mostrarTabuleiro(tabuleiro);
@@ -238,7 +259,11 @@ int main(){
     mostrarTabuleiro(tabuleiro);
 
     printf("\nHabilidade Cruz:\n");
-    habilidadeCruz(7,2,tabuleiro);
+    habilidadeCruz(7,1,tabuleiro);
+    mostrarTabuleiro(tabuleiro);
+    
+    printf("\nHabilidade Octaedro:\n");
+    habilidadeOctaedro(2,8,tabuleiro);
     mostrarTabuleiro(tabuleiro);
 
     return 0;
