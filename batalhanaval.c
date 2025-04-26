@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+//TABULEIRO
 void criarTabuleiro(int tabuleiro[10][10]){
     for(int i = 0; i < 10 ; i++)
     {
@@ -27,6 +28,7 @@ void mostrarTabuleiro(int tabuleiro[10][10]){
 
 }
 
+//POSICIONAR BARCOS
 void posicionarBarco( int tamanhoDoBarco, char posicao, int tabuleiro[10][10], int posicaoInicialX, int posicaoInicialY){
 
     //Variavvel usada para testa se nao ultrapassa a borda
@@ -150,6 +152,63 @@ void posicionarBarco( int tamanhoDoBarco, char posicao, int tabuleiro[10][10], i
         
 }
 
+//HABILIDADES
+void habilidadeCone(int posicaoX, int posicaoY, int tabuleiro[10][10]){
+
+    //testa se esta dentro do mapa
+    if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 2 && posicaoY < 8)
+    {
+        //topo
+        //tabuleiro[posicaoX - 1][posicaoY] = 5;
+        tabuleiro[posicaoX - 1][posicaoY] = (tabuleiro[posicaoX - 1][posicaoY] == 3) ? 1 : 5;
+        
+
+        //meio
+        tabuleiro[posicaoX][posicaoY - 1] = ( tabuleiro[posicaoX][posicaoY - 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY] = ( tabuleiro[posicaoX][posicaoY] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY + 1] = ( tabuleiro[posicaoX][posicaoY + 1] == 3) ? 1 : 5;
+
+        //base
+        tabuleiro[posicaoX + 1][posicaoY - 2] = ( tabuleiro[posicaoX + 1][posicaoY - 2] == 3) ? 1 : 5;
+        tabuleiro[posicaoX + 1][posicaoY - 1] = ( tabuleiro[posicaoX + 1][posicaoY - 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX + 1][posicaoY ] = ( tabuleiro[posicaoX + 1][posicaoY] == 3) ? 1 : 5;
+        tabuleiro[posicaoX + 1][posicaoY + 1] = ( tabuleiro[posicaoX + 1][posicaoY + 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX + 1][posicaoY + 2] = ( tabuleiro[posicaoX + 1][posicaoY + 2] == 3) ? 1 : 5;
+    }
+    else 
+    {
+        printf("Posicao invvalida\n");
+    }
+
+}
+void habilidadeCruz(int posicaoX, int posicaoY, int tabuleiro[10][10]){
+
+    //testa se esta dentro do mapa
+    if(posicaoX >= 1 && posicaoX < 9 && posicaoY >= 2 && posicaoY < 8)
+    {
+        //topo
+        //tabuleiro[posicaoX - 1][posicaoY] = 5;
+        tabuleiro[posicaoX - 1][posicaoY] = (tabuleiro[posicaoX - 1][posicaoY] == 3) ? 1 : 5;
+        
+
+        //meio
+        tabuleiro[posicaoX][posicaoY - 2] = ( tabuleiro[posicaoX][posicaoY - 2] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY - 1] = ( tabuleiro[posicaoX][posicaoY - 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY ] = ( tabuleiro[posicaoX][posicaoY] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY + 1] = ( tabuleiro[posicaoX][posicaoY + 1] == 3) ? 1 : 5;
+        tabuleiro[posicaoX][posicaoY + 2] = ( tabuleiro[posicaoX][posicaoY + 2] == 3) ? 1 : 5;
+
+        //base
+        tabuleiro[posicaoX + 1][posicaoY] = ( tabuleiro[posicaoX + 1][posicaoY] == 3) ? 1 : 5;
+        
+    }
+    else 
+    {
+        printf("Posicao invalida\n");
+    }
+
+}
+
 int main(){
 
     int tabuleiro[10][10];
@@ -173,5 +232,14 @@ int main(){
     printf("\nBarco posicionado na diagonal subindo:\n");
     posicionarBarco(3,'s',tabuleiro,2,5);
     mostrarTabuleiro(tabuleiro);
+    
+    printf("\nHabilidade Cone:\n");
+    habilidadeCone(8,7,tabuleiro);
+    mostrarTabuleiro(tabuleiro);
+
+    printf("\nHabilidade Cruz:\n");
+    habilidadeCruz(7,2,tabuleiro);
+    mostrarTabuleiro(tabuleiro);
+
     return 0;
 }
