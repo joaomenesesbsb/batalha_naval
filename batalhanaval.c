@@ -170,7 +170,7 @@ int main(){
     posicionarBarco(3,'d',tabuleiro,3,3);
     mostrarTabuleiro(tabuleiro);
 
-    printf("\nBarco posicionado na diagonal descendo:\n");
+    printf("\nBarco posicionado na diagonal subindo:\n");
     posicionarBarco(3,'s',tabuleiro,2,5);
     mostrarTabuleiro(tabuleiro);
     return 0;
